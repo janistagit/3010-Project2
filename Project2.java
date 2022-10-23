@@ -15,6 +15,7 @@ class Project2
     private static double[][] a; //matrix
     private static double[] b; //result of equations
     private static double [] x; //starting solutions
+    private static double [] x2;
     private static double error = 0;
 
     public static void main(String[] args)
@@ -83,16 +84,18 @@ class Project2
 
         System.out.println("\nEnter the starting solution values one by one.");
         x = new double[equations];
+        x2 = new double[equations];
         for(int i = 0; i < equations; i++)
         {
             System.out.println("Enter the value: ");
             x[i] = keyb.nextDouble();
+            x2[i] = x[i];
         }
 
         System.out.println("\nJacobi's Method:");
         jacobi(a, b, x, error);
         System.out.println("\n\nGauss-Seidel Method:");
-        gaussSeidel(a, b, x, error);
+        gaussSeidel(a, b, x2, error);
         System.out.println("\n");
     }
 
