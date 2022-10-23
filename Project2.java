@@ -17,7 +17,7 @@ class Project2
 
     public static void main(String[] args)
     {
-        System.out.println("\nGAUSSIAN ELIMINATION WITH SCALED PARTIAL PIVOTING");
+        System.out.println("\nJACOBI'S METHOD AND GAUSS-SEIDEL METHOD");
         Scanner scan = new Scanner(System.in);
         while(equations > 10 || equations < 2)
         {
