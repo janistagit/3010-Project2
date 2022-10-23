@@ -133,6 +133,60 @@ class Project2
         return;
     }
 
+    private static void gaussSeidel(double[][] a, double[] b, double[] x, double error)
+    {
+        int kmax = 50;
+        double delta = Math.pow(10, -10);
+        double epsilon = error;
+        int i, j, k, n;
+        double diag, sum;
+        double[] y = new double[equations];
+        n = a.length;
+        double normSum;
+
+        for(k = 0; k < kmax; k++)
+        {
+            normSum = 0;
+            y[k] = x[k];
+            
+            for(i = 0; i < n; i++)
+            {
+                sum = b[i];
+                diag = a[i][i];
+                if(Math.abs(diag) < delta)
+                {
+                    System.out.println("Diagonal element too small.");
+                    return;
+                }
+
+                for(j = 0; j < i-1; j++)
+                {
+                    sum = sum - (a[i][j] * x[j]);
+                }
+                for(j = i+1; j < n; j++)
+                {
+                    sum = sum - (a[i][j] * x[j]);
+                }
+
+                x[i] = sum/diag;
+            }
+            System.out.println(k + " " + x[k]);
+
+            for(int m = 0; m < x.length; m++)
+            {
+                normSum = normSum + Math.pow(x[m] - y[m], 2);
+            }
+            if(Math.sqrt(normSum) < epsilon)
+            {
+                System.out.println(k + " " + x[k]);
+                return;
+            }
+        }
+
+        System.out.println("Maximum iterations reached.");
+        return;
+    }
+
     private static double[][] readFile(String fileName) throws IOException
     {
         File myFile = new File(fileName);
@@ -157,6 +211,8 @@ class Project2
         inputFile.close();
         return output;
     }
+
+    
 
     public static void printMatrix()
     {
