@@ -93,6 +93,7 @@ class Project2
         jacobi(a, b, x, error);
         System.out.println("\n\nGauss-Seidel Method:");
         gaussSeidel(a, b, x, error);
+        System.out.println();
     }
 
     private static void jacobi(double[][] a, double[] b, double[] x, double error)
@@ -120,7 +121,7 @@ class Project2
                 diag = a[i][i];
                 if(Math.abs(diag) < delta)
                 {
-                    System.out.println("Diagonal element too small.");
+                    System.out.println("\nDiagonal element too small.");
                     return;
                 }
 
@@ -134,13 +135,13 @@ class Project2
 
                 x[i] = sum/diag;
             }
-            System.out.print("\nIteration: " + (k+1) + " [");
+            System.out.print("Iteration: " + (k+1) + " [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
             }
             System.out.printf("%.4f", x[x.length-1]);
-            System.out.print("]");
+            System.out.print("]\n");
 
             for(int m = 0; m < x.length; m++)
             {
@@ -148,7 +149,7 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.print("\nIteration: " + (k+1) + " [");
+                System.out.print("\nSolution: " + (k+1) + " [");
                 for(int m = 0; m < x.length-1; m++)
                 {
                     System.out.printf("%.4f ", x[m]);
@@ -159,7 +160,7 @@ class Project2
             }
         }
 
-        System.out.println("Maximum iterations reached.");
+        System.out.println("\nMaximum iterations reached.");
         return;
     }
 
@@ -188,11 +189,11 @@ class Project2
                 diag = a[i][i];
                 if(Math.abs(diag) < delta)
                 {
-                    System.out.println("Diagonal element too small.");
+                    System.out.println("\nDiagonal element too small.");
                     return;
                 }
 
-                for(j = 0; j < i-1; j++)
+                for(j = 0; j <= i-1; j++)
                 {
                     sum = sum - (a[i][j] * x[j]);
                 }
@@ -204,13 +205,13 @@ class Project2
                 x[i] = sum/diag;
             }
 
-            System.out.print("\nIteration: " + (k+1) + " [");
+            System.out.print("Iteration: " + (k+1) + " [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
             }
             System.out.printf("%.4f", x[x.length-1]);
-            System.out.print("]");
+            System.out.print("]\n");
 
             for(int m = 0; m < x.length; m++)
             {
@@ -218,7 +219,7 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.print("\nIteration: " + (k+1) + " [");
+                System.out.print("\nSolution: " + (k+1) + " [");
                 for(int m = 0; m < x.length-1; m++)
                 {
                     System.out.printf("%.4f ", x[m]);
@@ -229,7 +230,7 @@ class Project2
             }
         }
 
-        System.out.println("Maximum iterations reached.");
+        System.out.println("\nMaximum iterations reached.");
         return;
     }
 
@@ -257,8 +258,6 @@ class Project2
         inputFile.close();
         return output;
     }
-
-    
 
     public static void printMatrix()
     {
