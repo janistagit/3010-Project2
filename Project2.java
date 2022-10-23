@@ -12,8 +12,10 @@ class Project2
 {
     private static int equations = 11;
     private static int option = 0;
-    private static double[][] matrix;
-    private static double[] b;
+    private static double[][] a; //matrix
+    private static double[] b; //result of equations
+    private static double [] x; //starting solutions
+    private static double error = 0;
 
     public static void main(String[] args)
     {
@@ -35,15 +37,15 @@ class Project2
         if(option == 1)
         {
             System.out.print("\n");
-            matrix = new double[equations][equations];
+            a = new double[equations][equations];
             for(int i = 0; i < equations; i++)
             {
                 for(int j = 0; j < equations+1; j++)
                 {
                     if(j < equations)
                     {
-                        System.out.println("Enter matrix coefficient: ");
-                        matrix[i][j] = scan.nextInt();
+                        System.out.println("Enter a coefficient: ");
+                        a[i][j] = scan.nextInt();
                     }
                     else
                     {
@@ -62,7 +64,7 @@ class Project2
             
             try
             {
-                matrix = readFile(fileName); 
+                a = readFile(fileName); 
             }
             catch(IOException exception)
             {
@@ -76,6 +78,59 @@ class Project2
         System.out.println();
         System.out.println("Entered matrix: ");
         printMatrix();
+    }
+
+    private static void jacobi(double[][] a, double[] b, double[] x, double error)
+    {
+        int kmax = 50;
+        double delta = Math.pow(10, -10);
+        double epsilon = error;
+        int i, j, k, n;
+        double diag, sum;
+        double[] y = new double[equations];
+        n = a.length;
+        double normSum;
+
+        for(k = 0; k < kmax; k++)
+        {
+            normSum = 0;
+            y[k] = x[k];
+            
+            for(i = 0; i < n; i++)
+            {
+                sum = b[i];
+                diag = a[i][i];
+                if(Math.abs(diag) < delta)
+                {
+                    System.out.println("Diagonal element too small.");
+                    return;
+                }
+
+                for(j = 0; j < n; j++)
+                {
+                    if(j != i)
+                    {
+                        sum = sum - (a[i][j] * y[j]);
+                    }
+                }
+
+                x[i] = sum/diag;
+            }
+            System.out.println(k + " " + x[k]);
+
+            for(int m = 0; m < x.length; m++)
+            {
+                normSum = normSum + Math.pow(x[m] - y[m], 2);
+            }
+            if(Math.sqrt(normSum) < epsilon)
+            {
+                System.out.println(k + " " + x[k]);
+                return;
+            }
+        }
+
+        System.out.println("Maximum iterations reached.");
+        return;
     }
 
     private static double[][] readFile(String fileName) throws IOException
@@ -111,7 +166,7 @@ class Project2
             {
                 if(j < equations)
                 {
-                    System.out.print(matrix[i][j] + " ");
+                    System.out.print(a[i][j] + " ");
                 }
                 else
                 {
