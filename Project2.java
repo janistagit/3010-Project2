@@ -135,7 +135,7 @@ class Project2
 
                 x[i] = sum/diag;
             }
-            System.out.print("Iteration: " + (k+1) + " [");
+            System.out.print("Iteration " + (k+1) + ": [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
@@ -149,7 +149,7 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.print("\nSolution: " + (k+1) + " [");
+                System.out.print("\nSolution:" + " [");
                 for(int m = 0; m < x.length-1; m++)
                 {
                     System.out.printf("%.4f ", x[m]);
@@ -205,7 +205,7 @@ class Project2
                 x[i] = sum/diag;
             }
 
-            System.out.print("Iteration: " + (k+1) + " [");
+            System.out.print("Iteration " + (k+1) + ": [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
@@ -219,7 +219,7 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.print("\nSolution: " + (k+1) + " [");
+                System.out.print("\nSolution:" + " [");
                 for(int m = 0; m < x.length-1; m++)
                 {
                     System.out.printf("%.4f ", x[m]);
