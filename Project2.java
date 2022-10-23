@@ -165,6 +165,13 @@ class Project2
         }
 
         System.out.println("\nMaximum iterations reached.");
+        System.out.print("\nSolution:" + " [");
+                for(int m = 0; m < x.length-1; m++)
+                {
+                    System.out.printf("%.4f ", x[m]);
+                }
+                System.out.printf("%.4f", x[x.length-1]);
+                System.out.print("]T");
         return;
     }
 
@@ -237,6 +244,13 @@ class Project2
         }
 
         System.out.println("\nMaximum iterations reached.");
+        System.out.print("\nSolution:" + " [");
+                for(int m = 0; m < x.length-1; m++)
+                {
+                    System.out.printf("%.4f ", x[m]);
+                }
+                System.out.printf("%.4f", x[x.length-1]);
+                System.out.print("]T");
         return;
     }
 
