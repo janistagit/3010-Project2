@@ -93,7 +93,7 @@ class Project2
         jacobi(a, b, x, error);
         System.out.println("\n\nGauss-Seidel Method:");
         gaussSeidel(a, b, x, error);
-        System.out.println();
+        System.out.println("\n");
     }
 
     private static void jacobi(double[][] a, double[] b, double[] x, double error)
@@ -135,18 +135,22 @@ class Project2
 
                 x[i] = sum/diag;
             }
+
+            for(int m = 0; m < x.length; m++)
+            {
+                normSum = normSum + Math.pow(x[m] - y[m], 2);
+            }
+
             System.out.print("Iteration " + (k+1) + ": [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
             }
             System.out.printf("%.4f", x[x.length-1]);
-            System.out.print("]\n");
+            System.out.print("]T");
+            System.out.print(" Error: " + Math.sqrt(normSum) + "\n");
 
-            for(int m = 0; m < x.length; m++)
-            {
-                normSum = normSum + Math.pow(x[m] - y[m], 2);
-            }
+            
             if(Math.sqrt(normSum) < epsilon)
             {
                 System.out.print("\nSolution:" + " [");
@@ -155,7 +159,7 @@ class Project2
                     System.out.printf("%.4f ", x[m]);
                 }
                 System.out.printf("%.4f", x[x.length-1]);
-                System.out.print("]");                
+                System.out.print("]T");                
                 return;
             }
         }
@@ -205,18 +209,20 @@ class Project2
                 x[i] = sum/diag;
             }
 
+            for(int m = 0; m < x.length; m++)
+            {
+                normSum = normSum + Math.pow(x[m] - y[m], 2);
+            }
+
             System.out.print("Iteration " + (k+1) + ": [");
             for(int m = 0; m < x.length-1; m++)
             {
                 System.out.printf("%.4f ", x[m]);
             }
             System.out.printf("%.4f", x[x.length-1]);
-            System.out.print("]\n");
+            System.out.print("]T");
+            System.out.print(" Error: " + Math.sqrt(normSum) + "\n");
 
-            for(int m = 0; m < x.length; m++)
-            {
-                normSum = normSum + Math.pow(x[m] - y[m], 2);
-            }
             if(Math.sqrt(normSum) < epsilon)
             {
                 System.out.print("\nSolution:" + " [");
@@ -225,7 +231,7 @@ class Project2
                     System.out.printf("%.4f ", x[m]);
                 }
                 System.out.printf("%.4f", x[x.length-1]);
-                System.out.print("]");
+                System.out.print("]T");
                 return;
             }
         }
