@@ -71,13 +71,28 @@ class Project2
                 System.out.println("Error with file reading.");
                 System.exit(0);
             }
-            kb.close();
         }
-        scan.close();
 
         System.out.println();
         System.out.println("Entered matrix: ");
         printMatrix();
+
+        Scanner keyb = new Scanner(System.in);
+        System.out.println("\nEnter the stopping error: ");
+        error = keyb.nextDouble();
+
+        System.out.println("\nEnter the starting solution values one by one.");
+        x = new double[equations];
+        for(int i = 0; i < equations; i++)
+        {
+            System.out.println("Enter the value: ");
+            x[i] = keyb.nextDouble();
+        }
+
+        System.out.println("\nJacobi's Method:");
+        jacobi(a, b, x, error);
+        System.out.println("\n\nGauss-Seidel Method:");
+        gaussSeidel(a, b, x, error);
     }
 
     private static void jacobi(double[][] a, double[] b, double[] x, double error)
@@ -94,7 +109,10 @@ class Project2
         for(k = 0; k < kmax; k++)
         {
             normSum = 0;
-            y[k] = x[k];
+            for(int m = 0; m < x.length; m++)
+            {
+                y[m] = x[m];
+            }
             
             for(i = 0; i < n; i++)
             {
@@ -116,7 +134,13 @@ class Project2
 
                 x[i] = sum/diag;
             }
-            System.out.println(k + " " + x[k]);
+            System.out.print("\nIteration: " + (k+1) + " [");
+            for(int m = 0; m < x.length-1; m++)
+            {
+                System.out.printf("%.4f ", x[m]);
+            }
+            System.out.printf("%.4f", x[x.length-1]);
+            System.out.print("]");
 
             for(int m = 0; m < x.length; m++)
             {
@@ -124,7 +148,13 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.println(k + " " + x[k]);
+                System.out.print("\nIteration: " + (k+1) + " [");
+                for(int m = 0; m < x.length-1; m++)
+                {
+                    System.out.printf("%.4f ", x[m]);
+                }
+                System.out.printf("%.4f", x[x.length-1]);
+                System.out.print("]");                
                 return;
             }
         }
@@ -147,8 +177,11 @@ class Project2
         for(k = 0; k < kmax; k++)
         {
             normSum = 0;
-            y[k] = x[k];
-            
+            for(int m = 0; m < x.length; m++)
+            {
+                y[m] = x[m];
+            }
+
             for(i = 0; i < n; i++)
             {
                 sum = b[i];
@@ -170,7 +203,14 @@ class Project2
 
                 x[i] = sum/diag;
             }
-            System.out.println(k + " " + x[k]);
+
+            System.out.print("\nIteration: " + (k+1) + " [");
+            for(int m = 0; m < x.length-1; m++)
+            {
+                System.out.printf("%.4f ", x[m]);
+            }
+            System.out.printf("%.4f", x[x.length-1]);
+            System.out.print("]");
 
             for(int m = 0; m < x.length; m++)
             {
@@ -178,7 +218,13 @@ class Project2
             }
             if(Math.sqrt(normSum) < epsilon)
             {
-                System.out.println(k + " " + x[k]);
+                System.out.print("\nIteration: " + (k+1) + " [");
+                for(int m = 0; m < x.length-1; m++)
+                {
+                    System.out.printf("%.4f ", x[m]);
+                }
+                System.out.printf("%.4f", x[x.length-1]);
+                System.out.print("]");
                 return;
             }
         }
